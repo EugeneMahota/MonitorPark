@@ -1,0 +1,63 @@
+<div class="pl-4 pr-4" *ngIf="slide.name === 'Мозайка'">
+
+  <h2 class="title-mozaika mt-3 mb-3 font-weight-bold" *ngIf="slide.title">{{slide.title}}</h2>
+  <h4 class="text-muted mb-3 font-weight-bold" *ngIf="slide.text">{{slide.text}}</h4>
+  <div class="row" *ngFor="let moz of slide.object_mosaic">
+    <div class="col-{{item.columns}} mb-3 text-left" *ngFor="let item of moz.attrs">
+      <div class="card h-100">
+        <img [src]="item.url_picture" class="image">
+        <div class="card-body">
+          <div class="card-title">
+            <h5 class="font-weight-bold">{{item.rep_name}}</h5>
+          </div>
+          <div class="card-text text-muted">
+            {{item.text}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="p-5" *ngIf="slide.name === 'Реклама'">
+  <div class="title-mozaika mb-3 font-weight-bold display-2 p-5" *ngIf="slide.title">{{slide.title}}</div>
+  <h1 class="text-muted mb-3 font-weight-bold display-4 p-5" *ngIf="slide.text">{{slide.text}}</h1>
+</div>
+
+
+<div *ngIf="slide.name === 'Видео'" class="pt-0 mt-0">
+  <div class="position-absolute w-100">
+    <div class="title-mozaika mb-3 mt-3 font-weight-bold display-2 p-5" *ngIf="slide.title">{{slide.title}}</div>
+    <h1 class="text-muted mb-3 font-weight-bold display-4 p-5" *ngIf="slide.text">{{slide.text}}</h1>
+  </div>
+  <video class="pt-0 mt-0" title="Advertisement" muted="muted" [id]="slide.object_video[0].url_video"
+         [ngClass]="width > 769 ? 'video-horizontal':'video-vertical'"
+         [src]="slide.object_video[0].url_video" height="100%" width="100%" #video></video>
+</div>
+
+
+<div *ngIf="slide.name === 'Цена'">
+  <h2 class="title-mozaika mt-3 mb-3 font-weight-bold" *ngIf="slide.title">{{slide.title}}</h2>
+  <h4 class="text-muted mb-3 font-weight-bold" *ngIf="slide.text">{{slide.text}}</h4>
+  <table class="table table-sm table-striped">
+    <thead>
+    <tr>
+      <th class="border-0 m-auto" scope="col">Название</th>
+      <th class="border-0 m-auto" scope="col">Возраст</th>
+      <th class="border-0 m-auto" scope="col">Вес</th>
+      <th class="border-0 m-auto" scope="col">Рост</th>
+      <th class="border-0 m-auto" scope="col">Цена</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let attr of slide.object_price">
+      <td><h3 class="mb-0 m-auto">{{attr.rep_name}}</h3></td>
+      <td><h3 class="mb-0 m-auto">от {{attr.age_min}} до {{attr.age_max}} лет</h3></td>
+      <td><h3 class="mb-0 m-auto">от {{attr.weight}} кг</h3></td>
+      <td><h3 class="mb-0 m-auto">от {{attr.growth}} см</h3></td>
+      <td><h3 class="mb-0 m-auto font-weight-bold">{{attr.price}} ₽</h3></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
